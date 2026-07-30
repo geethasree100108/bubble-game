@@ -48,21 +48,33 @@ function startGame() {
   spawnTimer = setInterval(spawnBubble, 600); //assigning the color,size and poisition of bubble for each 0.6 seconds
 }
 function spawnBubble() {
-  //bubble created
-  const radius = Math.random() * 20 + 25; //choose raduis between 25px to 45px of the bubble
-  //to calculate the position of the bubble in canva
-  const x = Math.random() * (canvas.width - radius * 2) + radius; //guarantee the center of the bubble is placed so its edges never overflow or hide past the left and right wall
-  const y = Math.random() * (canvas.height - radius * 2.5) + radius * 1.5;
-  const hue = Math.floor(Math.random() * 360); //select random color coordinate andle between 0 deg to 359deg on circular HSL color wheel
+  const radius = Math.random() * 20 + 25;
+
+  // Define how many pixels of empty space you want around the edges
+  const edgeGap = 40;
+
+  // Calculate the safe spawning boundaries
+  const minX = radius + edgeGap;
+  const maxX = canvas.width - radius - edgeGap;
+
+  const minY = radius + edgeGap;
+  const maxY = canvas.height - radius - edgeGap;
+
+  // Randomize X and Y only within those safe boundaries
+  const x = Math.random() * (maxX - minX) + minX;
+  const y = Math.random() * (maxY - minY) + minY;
+
+  const hue = Math.floor(Math.random() * 360);
+
   bubbles.push({
     x,
     y,
     radius,
-    pulseSpeed: Math.random() * 0.03 + 0.02, //every bubble get its own random speed so rather than all flashing in perfect, so they ripple and pulse organically
+    pulseSpeed: Math.random() * 0.03 + 0.02,
     hue,
-    alpha: 1, //opacity of the bubble(fully visible) later it popped every frame -0.05 reduced makes the bubble fades smoothly
+    alpha: 1,
     currentRadius: radius,
-  }); //JS object that track the entire parameter of the bubble
+  });
 }
 function createSupernovaBurst(x, y, hue) {
   shockwaves.push({
