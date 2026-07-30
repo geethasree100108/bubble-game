@@ -48,8 +48,9 @@ function startGame(){
 function spawnBubble(){//bubble created
     const radius = Math.random()*20+25;//choose raduis between 25px to 45px of the bubble
     //to calculate the position of the bubble in canva
-    const x = Math.random()*(canvas.width-radius*2)+radius;//guarantee the center of the bubble is placed so its edges never overflow or hide past the left and right wall
-    const y = Math.random()*(canvas.height-radius*2.5)+radius*1.5;
+    const edgeGap=20;
+    const x = Math.random()*(canvas.width-2*(radius+edgeGap)+radius+edgeGap;//guarantee the center of the bubble is placed so its edges never overflow or hide past the left and right wall
+    const y = Math.random()*(canvas.height-2*(radius+edgeGap)+radius+edgeGap;
     const hue = Math.floor(Math.random()*360);//select random color coordinate andle between 0 deg to 359deg on circular HSL color wheel
     bubbles.push({
         x,y,radius,
