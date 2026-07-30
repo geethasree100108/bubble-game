@@ -84,11 +84,11 @@ function createSupernovaBurst(x,y,hue){
             decay: Math.random()*0.015+0.005,//life drop speed of sparks
             hue: hue
         });
+    }
         container.classList.add('shake');
         setTimeout(()=>{
             container.classList.remove('shake');
         },100);
-    }
 }
 
 canvas.addEventListener('pointerdown',(e)=>{
