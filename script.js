@@ -17,8 +17,8 @@ let gameInterval;
 let spawnTimer; //assigning the position ,color ,placing the bubble in gameBoard
 
 function resizeCanvas(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
 }//to resize the canvas draw grid according to user' web browser
 
 window.addEventListener('resize',resizeCanvas);//whenever the user resize their browser' page resizecanva function will run 
@@ -101,7 +101,7 @@ canvas.addEventListener('pointerdown',(e)=>{
         //calculate the distance from click to THIS bubble's center
         let dist = Math.sqrt((clickX-b.x)**2+(clickY-b.y)**2);//to ensure how far away the cursor points from the central point of the floating bubble target
        //Did the click land inside THIS bubble
-        if(dist < activeRadius){ //tap lands inside the circle 
+        if(dist < activeRadius+15){ //tap lands inside the circle 
             //found that this 'b' is the bubble you clicked
             createSupernovaBurst(b.x,b.y,b.hue);//explore at THIS bubble's poistion
             bubbles.splice(i,1);//remove THIS bubble from screen
