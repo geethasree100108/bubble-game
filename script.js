@@ -43,7 +43,7 @@ function startGame(){
         timerDisplay.textContent = "TIME: "+timeleft;
         if(timeleft<=0) endGame();
     },1000);
-    spawnTimer = setInterval(spawnBubble,600);//assigning the color,size and poisition of bubble for each 0.6 seconds
+    spawnTimer = setInterval(spawnBubble,200);//assigning the color,size and poisition of bubble for each 0.6 seconds
 }
 function spawnBubble(){//bubble created
     const radius = Math.random()*20+25;//choose raduis between 25px to 45px of the bubble
