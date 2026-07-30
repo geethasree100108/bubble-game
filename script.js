@@ -16,11 +16,9 @@ let shockwaves = []; //holds expanding rings
 let gameInterval;
 let spawnTimer; //assigning the position ,color ,placing the bubble in gameBoard
 
-const margin = 20;
-
 function resizeCanvas() {
-  canvas.width = window.innerWidth - margin * 2;
-  canvas.height = window.innerHeight - margin * 2;
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
 } //to resize the canvas draw grid according to user' web browser
 
 window.addEventListener("resize", resizeCanvas); //whenever the user resize their browser' page resizecanva function will run
@@ -48,8 +46,9 @@ function startGame() {
   spawnTimer = setInterval(spawnBubble, 600); //assigning the color,size and poisition of bubble for each 0.6 seconds
 }
 function spawnBubble() {
-  const radius = Math.random() * 20 + 25;
-
+  const minRadius = canvas.width * 0.08;
+  const maxRadius = canvas.width * 0.12;
+  const radius = Math.random() * (maxRadius - minRadius) + minRadius;
   // Define how many pixels of empty space you want around the edges
   const edgeGap = 40;
 

@@ -9,7 +9,7 @@ body {
   color: #ffffff;
   font-family: "Courier New", Courier, monospace;
   overflow: hidden; /*prevent the vertical or horizontal scroll bar when the conrent becomes bigger than the body*/
-  height: 100vh;
+  height: 100dvh;
 }
 #hud {
   position: absolute;
