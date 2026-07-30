@@ -46,20 +46,31 @@ function startGame() {
   spawnTimer = setInterval(spawnBubble, 600); //assigning the color,size and poisition of bubble for each 0.6 seconds
 }
 function spawnBubble() {
-  const minRadius = canvas.width * 0.08;
-  const maxRadius = canvas.width * 0.12;
-  const radius = Math.random() * (maxRadius - minRadius) + minRadius;
-  // Define how many pixels of empty space you want around the edges
-  const edgeGap = 40;
+  // 1. Get the smaller screen dimension (prevents massive bubbles on wide screens)
+  const referenceSize = Math.min(canvas.width, canvas.height);
 
-  // Calculate the safe spawning boundaries
+  // 2. Calculate percentage-based sizes
+  let minRadius = referenceSize * 0.06;
+  let maxRadius = referenceSize * 0.1;
+
+  // 3. Set an absolute maximum cap for desktop screens (e.g., 40px to 60px)
+  // If the percentage math results in a number bigger than 40/60, it forces it back down.
+  minRadius = Math.min(minRadius, 40);
+  maxRadius = Math.min(maxRadius, 60);
+
+  // Set minimum limits as well, just in case a screen is incredibly tiny
+  minRadius = Math.max(minRadius, 25);
+  maxRadius = Math.max(maxRadius, 40);
+
+  const radius = Math.random() * (maxRadius - minRadius) + minRadius;
+
+  // The edge gap logic from before remains exactly the same
+  const edgeGap = 20;
   const minX = radius + edgeGap;
   const maxX = canvas.width - radius - edgeGap;
-
   const minY = radius + edgeGap;
   const maxY = canvas.height - radius - edgeGap;
 
-  // Randomize X and Y only within those safe boundaries
   const x = Math.random() * (maxX - minX) + minX;
   const y = Math.random() * (maxY - minY) + minY;
 
