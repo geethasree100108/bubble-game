@@ -12,7 +12,7 @@ let timeleft = 30;
 let bubbles = []; //holdes floating target of the bubble
 let particles = []; // active physics spark
 let shockwaves = [];//holds expanding rings
-
+const popSound = new Audio('https://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3');
 let gameInterval;
 let spawnTimer; //assigning the position ,color ,placing the bubble in gameBoard
 
@@ -25,6 +25,7 @@ window.addEventListener('resize',resizeCanvas);//whenever the user resize their 
 resizeCanvas();//whenever the page loads this function will run
 
 function startGame(){
+    popSound.load();
     score = 0;
     timeleft = 30;
     bubbles = [];
@@ -61,6 +62,8 @@ function spawnBubble(){//bubble created
     });//JS object that track the entire parameter of the bubble
 }
 function createSupernovaBurst(x,y,hue){
+    popSound.currentTime = 0;//rewinding sound so for rapid pops it will work
+    popSound.play();
     shockwaves.push({
         x,y,
         radius:5,
